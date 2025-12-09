@@ -24,12 +24,10 @@ jobs:
           registry-url: "https://registry.npmjs.org"
           scope: "@flicknote"
 
-      - uses: oven-sh/setup-bun@v2
-
-      - run: bun install
+      - run: npm ci
 
       - name: Build
-        run: bun run build
+        run: npm run build
 
       - name: Semantic Release
         run: npm run release
