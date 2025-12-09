@@ -1,0 +1,47 @@
+{
+  "name": "@flicknote/hono-middlewares",
+  "version": "1.0.0",
+  "description": "Shared middleware for FlickNote workers",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "release": "npx semantic-release"
+  },
+  "keywords": [
+    "flicknote",
+    "middleware",
+    "hono",
+    "cloudflare",
+    "workers"
+  ],
+  "author": "FlickNote Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:GuionAI/hono-middlewares.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "peerDependencies": {
+    "hono": "^4.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
