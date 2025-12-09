@@ -1,6 +1,7 @@
 import type { Context, Next } from "hono";
 import type { AuthEnv } from "./types";
 import { verifyJwtToken } from "./utils/verifyJwt";
+import { verifyInternalApiKey } from "./utils/verifyInternalApiKey";
 
 /**
  * Combined auth middleware that accepts either:
@@ -51,9 +52,9 @@ async function handleInternalAuth(
   next: Next,
   secret: string,
 ): Promise<Response | void> {
-  const internalApiKey = await c.env.INTERNAL_API_KEY.get();
+  const result = await verifyInternalApiKey(c.env, secret);
 
-  if (!secret || secret !== internalApiKey) {
+  if (!result.success) {
     return c.json({ error: "Unauthorized" }, 401);
   }
 

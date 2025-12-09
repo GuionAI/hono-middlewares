@@ -1,5 +1,6 @@
 import type { Context, Next } from "hono";
 import type { AuthEnv } from "./types";
+import { verifyInternalApiKey } from "./utils/verifyInternalApiKey";
 
 /**
  * Internal API key authentication middleware.
@@ -10,21 +11,14 @@ const internalAuthMiddleware = async (
   c: Context<AuthEnv>,
   next: Next,
 ): Promise<Response | void> => {
-  // Skip validation in dev environment
-  const isDev = c.env.WORKER_URL?.includes("dev-");
-  if (isDev) {
-    await next();
-    return;
-  }
-
   const secret = c.req.header("X-API-KEY");
-  const internalApiKey = await c.env.INTERNAL_API_KEY.get();
+  const result = await verifyInternalApiKey(c.env, secret ?? "");
 
-  if (!secret || secret !== internalApiKey) {
+  if (!result.success) {
     return c.json(
       {
         error: "Unauthorized",
-        message: "Invalid or missing API key",
+        message: result.error,
       },
       403,
     );
