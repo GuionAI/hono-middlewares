@@ -22,7 +22,7 @@ export interface AuthBindings {
  */
 export interface AuthVariables {
   userId: string;
-  authType: "jwt" | "internal";
+  authType: "jwt" | "internal" | "apikey";
 }
 
 /**
