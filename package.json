@@ -39,9 +39,11 @@
     "registry": "https://registry.npmjs.org/"
   },
   "peerDependencies": {
-    "hono": "^4.0.0"
+    "hono": "^4.0.0",
+    "@flicknote/types": "^3.3.0"
   },
   "devDependencies": {
+    "@flicknote/types": "^3.3.0",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/npm": "^13.1.2",
     "semantic-release": "^25.0.2",
